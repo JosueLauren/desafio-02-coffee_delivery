@@ -1,12 +1,12 @@
 import { ShoppingCart, Plus, Minus } from 'phosphor-react'
 
+import { CardContainer, Actions } from './styles'
+
 import {
-  CardContainer,
-  Actions,
   CounterButtons,
   CounterButtonLess,
   CounterButtonMore,
-} from './styles'
+} from '../../../../components/CounterButtons/styles'
 
 import { ItemCoffeeType } from './../../mock/CoffeeList'
 
