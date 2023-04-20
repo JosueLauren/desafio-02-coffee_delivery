@@ -1,3 +1,7 @@
+import { useContext, useEffect } from 'react'
+
+import { OrderContext } from '../../contexts/OrderContext'
+
 import { MapPin, Timer, CurrencyDollar } from 'phosphor-react'
 
 import {
@@ -12,6 +16,13 @@ import {
 import completedOrderImage from './../../assets/imagem_pedido_finalizado.svg'
 
 export const Success = () => {
+  const { formOfPayment, address, resetListCoffeSelected } =
+    useContext(OrderContext)
+
+  useEffect(() => {
+    resetListCoffeSelected()
+  }, [])
+
   return (
     <SuccessContainer>
       <h1>Uhu! Pedido confirmado</h1>
@@ -23,8 +34,11 @@ export const Success = () => {
               <MapPin weight="fill" size={16} color="#ffff" />
             </span>
             <p>
-              Entrega em <b>Rua João Daniel Martinelli, 102</b> Farrapos - Porto
-              Alegre, RS
+              Entrega em{' '}
+              <b>
+                {address.road}, {address.number}
+              </b>{' '}
+              {address.neighborhood} - {address.city}, {address.uf}
             </p>
           </InfoAddress>
           <DeliveryTimeInfo>
@@ -45,7 +59,7 @@ export const Success = () => {
             <p>
               Pagamento na entrega
               <span>
-                <b>Cartão de Crédito</b>
+                <b>{formOfPayment}</b>
               </span>
             </p>
           </PaymentInfo>
