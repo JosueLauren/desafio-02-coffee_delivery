@@ -1,15 +1,8 @@
-import {
-  MapPin,
-  CurrencyDollar,
-  CreditCard,
-  Money,
-  Bank,
-  Plus,
-  Minus,
-  Trash,
-} from 'phosphor-react'
+import { useContext } from 'react'
 
-import tradicional from './../../assets/tradicional.svg'
+import { OrderContext } from '../../contexts/OrderContext'
+
+import { MapPin, CurrencyDollar, CreditCard, Money, Bank } from 'phosphor-react'
 
 import {
   CheckoutContainer,
@@ -20,22 +13,29 @@ import {
   FormOrder,
   TotalItems,
   SelectCard,
-  CoffeeCard,
-  Actions,
-  ButtonRemove,
   ItemValue,
   DeliveryValue,
   TotalPayable,
   ButtonConfirmOrder,
 } from './styles'
 
-import {
-  CounterButtons,
-  CounterButtonLess,
-  CounterButtonMore,
-} from './../../components/CounterButtons/styles'
+import { CoffeCardSelected } from './components/CoffeCardSelected'
+import { NavLink } from 'react-router-dom'
 
 export const Checkout = () => {
+  const {
+    listCoffeSelected,
+    totalValueOfItems,
+    address,
+    formOfPayment,
+    handleSetAdress,
+    handleSetFormOfPayment,
+    checkEmptyFields,
+  } = useContext(OrderContext)
+
+  const totalItemPricePlusShipping = totalValueOfItems + 3.5
+  const emptyFields = checkEmptyFields()
+
   return (
     <CheckoutContainer>
       <CompleteOrder>
@@ -50,21 +50,46 @@ export const Checkout = () => {
 
           <form action="">
             <fieldset>
-              <input className="field-cep" type="text" placeholder="CEP" />
+              <input
+                className="field-cep"
+                type="text"
+                placeholder="CEP"
+                required
+                value={address.cep}
+                onChange={(event) => handleSetAdress('cep', event.target.value)}
+              />
             </fieldset>
             <fieldset>
-              <input className="field-street" type="text" placeholder="Rua" />
+              <input
+                className="field-street"
+                type="text"
+                placeholder="Rua"
+                required
+                value={address.road}
+                onChange={(event) =>
+                  handleSetAdress('road', event.target.value)
+                }
+              />
             </fieldset>
             <fieldset>
               <input
                 className="field-number"
                 type="text"
                 placeholder="Número"
+                required
+                value={address.number}
+                onChange={(event) =>
+                  handleSetAdress('number', event.target.value)
+                }
               />
               <input
                 className="field-complement"
                 type="text"
                 placeholder="Complemento"
+                value={address.complement}
+                onChange={(event) =>
+                  handleSetAdress('complement', event.target.value)
+                }
               />
             </fieldset>
             <fieldset>
@@ -72,9 +97,31 @@ export const Checkout = () => {
                 className="field-neighborhood"
                 type="text"
                 placeholder="Bairro"
+                required
+                value={address.neighborhood}
+                onChange={(event) =>
+                  handleSetAdress('neighborhood', event.target.value)
+                }
               />
-              <input className="field-city" type="text" placeholder="Cidade" />
-              <input className="field-uf" type="text" placeholder="UF" />
+              <input
+                className="field-city"
+                type="text"
+                placeholder="Cidade"
+                required
+                value={address.city}
+                onChange={(event) =>
+                  handleSetAdress('city', event.target.value)
+                }
+              />
+              <input
+                className="field-uf"
+                type="text"
+                placeholder="UF"
+                maxLength={2}
+                required
+                value={address.uf}
+                onChange={(event) => handleSetAdress('uf', event.target.value)}
+              />
             </fieldset>
           </form>
         </FormOrder>
@@ -88,17 +135,25 @@ export const Checkout = () => {
               O pagamento é feito na entrega. Escolha a forma que deseja pagar
             </p>
           </div>
-
           <SelectCard>
-            <button>
+            <button
+              className={formOfPayment === 'Cartão de Crédito' ? 'active' : ''}
+              onClick={() => handleSetFormOfPayment('Cartão de Crédito')}
+            >
               <CreditCard color="#8047F8" size={16} />
               Cartão de crédito
             </button>
-            <button>
+            <button
+              className={formOfPayment === 'Cartão de Débito' ? 'active' : ''}
+              onClick={() => handleSetFormOfPayment('Cartão de Débito')}
+            >
               <Bank color="#8047F8" size={16} />
               Cartão de débito
             </button>
-            <button>
+            <button
+              className={formOfPayment === 'Dinheiro' ? 'active' : ''}
+              onClick={() => handleSetFormOfPayment('Dinheiro')}
+            >
               <Money color="#8047F8" size={16} />
               Dinheiro
             </button>
@@ -109,31 +164,15 @@ export const Checkout = () => {
       <CoffeeSelectedContainer>
         <h3>Cafés selecionados</h3>
         <CoffeeSelectedContent>
-          <CoffeeCard>
-            <img src={tradicional} alt="" width="64px" height="64px" />
-            <div>
-              <p>Expresso Tradicional</p>
-              <Actions>
-                <CounterButtons>
-                  <CounterButtonLess>
-                    <Minus weight="bold" />
-                  </CounterButtonLess>
-                  <span>1</span>
-                  <CounterButtonMore>
-                    <Plus weight="bold" />
-                  </CounterButtonMore>
-                </CounterButtons>
-                <ButtonRemove>
-                  <Trash color="#8047F8" size={16} /> Remover
-                </ButtonRemove>
-              </Actions>
-            </div>
-            <span>RS 9,99</span>
-          </CoffeeCard>
+          {listCoffeSelected.map((newCoffee) => {
+            return (
+              <CoffeCardSelected key={newCoffee.name} newCoffee={newCoffee} />
+            )
+          })}
           <TotalItems>
             <ItemValue>
               <p>Total de itens</p>
-              <span>R$ 29,70</span>
+              <span>R$ {totalValueOfItems.toFixed(2)}</span>
             </ItemValue>
             <DeliveryValue>
               <p>Entrega</p>
@@ -141,9 +180,16 @@ export const Checkout = () => {
             </DeliveryValue>
             <TotalPayable>
               <p>Total</p>
-              <span>R$ 33,20</span>
+              <span>R$ {totalItemPricePlusShipping.toFixed(2)}</span>
             </TotalPayable>
-            <ButtonConfirmOrder>Confirmar Pedido</ButtonConfirmOrder>
+            <ButtonConfirmOrder
+              disabled={emptyFields}
+              onClick={checkEmptyFields}
+            >
+              <NavLink to={emptyFields ? '#' : '/success'}>
+                Confirmar Pedido
+              </NavLink>
+            </ButtonConfirmOrder>
           </TotalItems>
         </CoffeeSelectedContent>
       </CoffeeSelectedContainer>

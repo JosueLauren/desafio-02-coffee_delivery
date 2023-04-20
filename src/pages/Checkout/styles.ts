@@ -130,6 +130,11 @@ export const SelectCard = styled.div`
     &:hover {
       background: ${(props) => props.theme['base-hover']};
     }
+
+    &.active {
+      border: 1px solid ${(props) => props.theme.purple};
+      background: ${(props) => props.theme['purple-light']};
+    }
   }
 `
 
@@ -145,42 +150,6 @@ export const CoffeeSelectedContent = styled.div`
   padding: 2.5rem;
   border-radius: 6px 44px;
   background: ${(props) => props.theme['base-card']};
-`
-
-export const CoffeeCard = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 1.5rem 0;
-  border-bottom: 1px solid ${(props) => props.theme['base-button']};
-
-  p {
-    color: ${(props) => props.theme['base-subtitle']};
-    line-height: 130%;
-  }
-
-  span {
-    font-weight: 700;
-    color: ${(props) => props.theme['base-text']};
-  }
-`
-export const Actions = styled.div`
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-`
-
-export const ButtonRemove = styled.button`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
-  text-transform: uppercase;
-  font-size: 0.75rem;
-  color: ${(props) => props.theme['base-text']};
-  border: 0;
-  padding: 0 0.5rem;
-  background: ${(props) => props.theme['base-button']};
-  border-radius: 6px;
 `
 
 export const TotalItems = styled.div`
@@ -211,7 +180,6 @@ export const TotalPayable = styled.div`
 `
 
 export const ButtonConfirmOrder = styled.button`
-  padding: 0.75rem;
   width: 100%;
   color: ${(props) => props.theme.white};
   border-radius: 6px;
@@ -224,7 +192,22 @@ export const ButtonConfirmOrder = styled.button`
   line-height: 160%;
   transition: background 0.1s;
 
-  &:hover {
+  &:not(:disabled):hover {
     background: ${(props) => props.theme['yellow-dark']};
+  }
+
+  &:disabled {
+    a {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  a {
+    display: block;
+    text-decoration: none;
+    color: ${(props) => props.theme.white};
+    padding: 0.75rem;
+    border-radius: 6px;
   }
 `
