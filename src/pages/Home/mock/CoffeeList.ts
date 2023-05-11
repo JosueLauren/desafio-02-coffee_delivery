@@ -5,6 +5,13 @@ import chocolate from './../../../assets/chocolate-quente.svg'
 import comLeite from './../../../assets/com-leite.svg'
 import cremoso from './../../../assets/cremoso.svg'
 import cubano from './../../../assets/cubano.svg'
+import gelado from './../../../assets/gelado.svg'
+import havaiano from './../../../assets/havaiano.svg'
+import irlandes from './../../../assets/irlandes.svg'
+import latte from './../../../assets/latte.svg'
+import macchiato from './../../../assets/macchiato.svg'
+import mocaccino from './../../../assets/mocaccino.svg'
+import tradicional from './../../../assets/tradicional.svg'
 
 export interface ItemCoffeeType {
   nameImage: string
@@ -16,7 +23,7 @@ export interface ItemCoffeeType {
 
 export const CoffeeList: ItemCoffeeType[] = [
   {
-    nameImage: 'tradicional.svg',
+    nameImage: `${tradicional}`,
     type: ['Tradicional'],
     name: 'Expresso Tradicional',
     description: 'O tradicional café feito com água quente e grãos moídos',
@@ -30,28 +37,28 @@ export const CoffeeList: ItemCoffeeType[] = [
     price: 9.9,
   },
   {
-    nameImage: 'cremoso.svg',
+    nameImage: `${cremoso}`,
     type: ['Tradicional'],
     name: 'Expresso Cremoso',
     description: 'Café expresso tradicional com espuma cremosa',
     price: 9.9,
   },
   {
-    nameImage: 'gelado.svg',
+    nameImage: `${gelado}`,
     type: ['Tradicional', 'Gelado'],
     name: 'Expresso Gelado',
     description: 'Bebida preparada com café expresso e cubos de gelo',
     price: 9.9,
   },
   {
-    nameImage: 'com-leite.svg',
+    nameImage: `${comLeite}`,
     type: ['Tradicional', 'Com Leite'],
     name: 'Café com leite',
     description: 'Meio a meio de expresso tradicional com leite vaporizado',
     price: 9.9,
   },
   {
-    nameImage: 'latte.svg',
+    nameImage: `${latte}`,
     type: ['Tradicional', 'Com Leite'],
     name: 'Latte',
     description:
@@ -67,7 +74,7 @@ export const CoffeeList: ItemCoffeeType[] = [
     price: 9.9,
   },
   {
-    nameImage: 'macchiato.svg',
+    nameImage: `${macchiato}`,
     type: ['Tradicional', 'Com Leite'],
     name: 'Macchiato',
     description:
@@ -75,21 +82,21 @@ export const CoffeeList: ItemCoffeeType[] = [
     price: 9.9,
   },
   {
-    nameImage: 'mocaccino.svg',
+    nameImage: `${mocaccino}`,
     type: ['Tradicional', 'Com Leite'],
     name: 'Mocaccino',
     description: 'Café expresso com calda de chocolate, pouco leite e espuma',
     price: 9.9,
   },
   {
-    nameImage: 'chocolate-quente.svg',
+    nameImage: `${chocolate}`,
     type: ['Especial', 'Com Leite'],
     name: 'Chocolate Quente',
     description: 'Bebida feita com chocolate dissolvido no leite quente e café',
     price: 9.9,
   },
   {
-    nameImage: 'cubano.svg',
+    nameImage: `${cubano}`,
     type: ['Especial', 'Alcoólico', 'gelado'],
     name: 'Cubano',
     description:
@@ -97,21 +104,21 @@ export const CoffeeList: ItemCoffeeType[] = [
     price: 9.9,
   },
   {
-    nameImage: 'havaiano.svg',
+    nameImage: `${havaiano}`,
     type: ['Especial'],
     name: 'Havaiano',
     description: 'Bebida adocicada preparada com café e leite de coco',
     price: 9.9,
   },
   {
-    nameImage: 'arabe.svg',
+    nameImage: `${arabe}`,
     type: ['Especial'],
     name: 'Árabe',
     description: 'Bebida preparada com grãos de café árabe e especiarias',
     price: 9.9,
   },
   {
-    nameImage: 'irlandes.svg',
+    nameImage: `${irlandes}`,
     type: ['Especial', 'alcoolico'],
     name: 'Irlandês',
     description: 'Bebida a base de café, uísque irlandês, açúcar e chantilly',
