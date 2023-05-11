@@ -27,12 +27,7 @@ export const CoffeCardSelected = ({ newCoffee }: CoffeCardSelectedProps) => {
 
   return (
     <CoffeeCard>
-      <img
-        src={`/src/assets/${newCoffee.imageCoffe}`}
-        alt=""
-        width="64px"
-        height="64px"
-      />
+      <img src={newCoffee.imageCoffe} alt="" width="64px" height="64px" />
       <div>
         <p>{newCoffee.name}</p>
         <Actions>
