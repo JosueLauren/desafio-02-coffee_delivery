@@ -48,7 +48,7 @@ export const Card = ({ ItemCoffeeType }: CardProps) => {
 
   return (
     <CardContainer>
-      <img src={`/src/assets/${nameImage}`} alt="" />
+      <img src={nameImage} alt="" />
       <div className="type-coffe">
         {type.map((item) => (
           <span key={item.length}>{item}</span>

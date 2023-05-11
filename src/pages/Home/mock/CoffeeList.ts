@@ -1,3 +1,11 @@
+import americano from './../../../assets/americano.svg'
+import arabe from './../../../assets/arabe.svg'
+import capuccino from './../../../assets/capuccino.svg'
+import chocolate from './../../../assets/chocolate-quente.svg'
+import comLeite from './../../../assets/com-leite.svg'
+import cremoso from './../../../assets/cremoso.svg'
+import cubano from './../../../assets/cubano.svg'
+
 export interface ItemCoffeeType {
   nameImage: string
   type: string[]
@@ -15,7 +23,7 @@ export const CoffeeList: ItemCoffeeType[] = [
     price: 9.9,
   },
   {
-    nameImage: 'americano.svg',
+    nameImage: `${americano}`,
     type: ['Tradicional'],
     name: 'Expresso Americano',
     description: 'Expresso diluído, menos intenso que o tradicional',
@@ -51,7 +59,7 @@ export const CoffeeList: ItemCoffeeType[] = [
     price: 9.9,
   },
   {
-    nameImage: 'capuccino.svg',
+    nameImage: `${capuccino}`,
     type: ['Tradicional', 'Com Leite'],
     name: 'Capuccino',
     description:
